@@ -11,5 +11,13 @@ class Musician(models.Model):
     name = models.CharField(max_length=100)
     age = models.IntegerField()
 
-def __str__(self):
-    return f'{self.name} : {self:age}'
+    def __str__(self):
+        return f'{self.name} : {self.age}'
+
+class Album(models.Model):
+    # Musican과 1:N 관계
+    musician = models.ForeignKey(Musician, on_delete=models.CASCADE)
+    title = models.CharField(max_length=150)
+
+    def __str__(self):
+        return f'{self.title}'

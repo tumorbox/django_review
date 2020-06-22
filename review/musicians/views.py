@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import MusicianForm
-from .models import Musician
+from .models import Musician, Album
 
 # Create your views here.
 # 함수정의 함수이름(parameter)
@@ -43,8 +43,10 @@ def create(request):
 def detail(request, musician_pk):
     # Model.objects.get(조건=변수명)
     musician = Musician.objects.get(pk=musician_pk)
+    albums = musician.album_set.all()
     context = {
-        'musician' : musician
+        'musician' : musician,
+        'albums': albums,
     }
     return render(request, 'musicians/detail.html', context)
 
@@ -69,4 +71,7 @@ def delete(request, musician_pk):
     musician = Musician.objects.get(pk=musician_pk)
     musician.delete()
     return redirect('musicians:index')
+
+def album_create(request, musician_pk):
+    return redirect('musicians:detail',)
 

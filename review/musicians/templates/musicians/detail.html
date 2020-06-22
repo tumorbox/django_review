@@ -14,6 +14,15 @@
   <!-- 각 변수에 접근할 수 있다. -->
   <P>이름 : {{ musician.name }}</P>
   <p>나이 : {{ musician.age }}</p>
+  <hr>
+  <p>{{ albums|length }}개의 앨범</p>
+  <ul>
+  {% for album in albums %}
+    <li>{{ album.title }}</li>
+  {% empty %}
+    <p>앨범이 없습니다.</p>
+  {% endfor %}
+</ul>
   <a href="{% url 'musicians:update' musician.pk %}">수정</a>
   <a href="{% url 'musicians:delete' musician.pk %}">삭제</a>
   <a href="{% url 'musicians:index' %}">[back]</a>
